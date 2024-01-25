@@ -49,6 +49,8 @@ app.use(bodyParser.json()); //saves data in req.body
 
 //DataBase connection->
 const db = require("./db");
+require('dotenv').config();
+
 
 //const Person = require("./models/Person");
 
@@ -169,6 +171,10 @@ app.use("/person", personRoutes);
 const menuItemRoutes = require("./routes/menuRoutes");
 app.use("/menu", menuItemRoutes);
 
-app.listen(3000, () => {
-  console.log("Port 3000 Live");
+
+//using .env file-> port 
+const PORT= process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Port ${PORT} is live`);
 });
