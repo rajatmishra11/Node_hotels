@@ -10,7 +10,7 @@ const mongoUrl = process.env.DB_URL;
 //2.    setup MongodB connection
 mongoose.connect(mongoUrl, {});
 
-//3.    Accesing the Default Connection Object
+//3.   Accesing the Default Connection Object
 //          Mongoose maintains a default connection Object representing the MongoDB Connection.
 const db = mongoose.connection;
 
