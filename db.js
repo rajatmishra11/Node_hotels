@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 //1.    Define the MongodB Connection->
-//const mongoUrl= 'mongodb://127.0.0.1:27017/hotels';  //local computer-> mongoDB_Compass
+const mongoUrl= 'mongodb://127.0.0.1:27017/hotels';  //local computer-> mongoDB_Compass
 require('dotenv').config();
 
-const mongoUrl = process.env.DB_URL;
+//const mongoUrl = process.env.DB_URL;
 //Setup of Online dB -> mongoDB_Atlas
 
 //2.    setup MongodB connection

@@ -44,19 +44,37 @@ app.post("/items", (req, res) =>{
 })
 */
 
+
+
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); //saves data in req.body
+
+//Middleware Function->
+const logRequest =(req, res , next )=>{
+  console.log(`${new Date().toLocaleString()} Request Made to : ${req.originalUrl}`);
+  next();
+}
+app.use(logRequest)
+
 
 //DataBase connection->
 const db = require("./db");
 require('dotenv').config();
+const passport=require('./auth');
 
 
-//const Person = require("./models/Person");
 
 const menuItem = require("./models/menuItem");
 
-app.get("/", function (req, res) {
+
+app.use(passport.initialize());
+
+app.use(logRequest);  //Saare Routes pe Logging lagaane ke liye   
+const localAuthMiddleware= passport.authenticate('local', {session: false});
+
+
+app.get("/" , function (req, res) {
   res.send("Welcome to Hotel.. How can i help u with list of menu?");
 });
 
@@ -166,7 +184,7 @@ app.get("/", function (req, res) {
 
 //Import the router files
 const personRoutes = require("./routes/personRoutes");
-app.use("/person", personRoutes);
+app.use("/person",localAuthMiddleware, personRoutes);
 
 const menuItemRoutes = require("./routes/menuRoutes");
 app.use("/menu", menuItemRoutes);
